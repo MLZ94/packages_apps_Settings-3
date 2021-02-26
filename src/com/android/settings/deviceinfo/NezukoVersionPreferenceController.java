@@ -25,6 +25,7 @@ import com.android.settings.core.BasePreferenceController;
 public class NezukoVersionPreferenceController extends BasePreferenceController {
 
     private static final String PROPERTY_NEZUKO_VERSION = "org.nezuko.version";
+    private static final String BUILD_STATUS = "org.pixelexperience.build_type";
 
     public NezukoVersionPreferenceController(Context context, String key) {
         super(context, key);
@@ -38,7 +39,10 @@ public class NezukoVersionPreferenceController extends BasePreferenceController 
 
     @Override
     public CharSequence getSummary() {
-        return SystemProperties.get(PROPERTY_NEZUKO_VERSION,
-                mContext.getString(R.string.unknown));
+        String romVersion = SystemProperties.get(PROPERTY_NEZUKO_VERSION,
+               this.mContext.getString(R.string.unknown));
+        String romStatus = SystemProperties.get(BUILD_STATUS,
+                this.mContext.getString(R.string.unknown));
+            return romVersion + " | " + romStatus;
     }
 }
